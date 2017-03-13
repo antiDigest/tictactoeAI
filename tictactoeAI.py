@@ -4,7 +4,7 @@ import sys
 from tictactoe import tictactoe
 
 
-class tictactoeAI(object):
+class tictactoeAI(tictactoe):
 
     def __init__(self):
         pass
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     game.registerMove(2, 0)
     ai.makeMove(game)
     game.displayBoard()
-    # Move 6 - AI will not be able to make any move now.
+    # Move 6 - AI should not be able to make any move now.
     game.registerMove(2, 2)
     ai.makeMove(game)
     game.displayBoard()
