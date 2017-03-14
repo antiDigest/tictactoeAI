@@ -7,6 +7,7 @@ class tictactoe(object):
 
     def __init__(self):
         self.agent = []
+        self.end = 0
         for i in range(0, 3):
             self.agent.append([0, 0, 0])
 
@@ -26,36 +27,63 @@ class tictactoe(object):
             print
 
     def registerMove(self, x, y):
-        self.agent[x][y] = 2
-        if self.gameWin():
+        if self.agent[x][y] == 0 and self.end == 0:
+            self.agent[x][y] = 2
+            return self.gameWin()
+        elif self.end == 0:
+            print('Not a valid move !')
+            return "Invalid Move"
+        else:
+            del self
+            print "END OF GAME"
             return False
 
     def gameWin(self):
-        for i in range(0, 3):
-            # Checking Rows
-            if (self.agent[i][0] == self.agent[i][1] and self.agent[i][0] == self.agent[i][2]):
-                if self.agent[i][0] == 2:
-                    print "O wins"
-                if self.agent[i][0] == 1:
-                    print "X wins"
-                return True
 
-            # Checking Columns
-            if (self.agent[0][i] == self.agent[1][i] and self.agent[0][i] == self.agent[2][i]):
-                if self.agent[0][i] == 2:
-                    print "O wins"
-                if self.agent[0][i] == 1:
-                    print "X wins"
-                return True
+        # Checking rows
+        for i in range(0, 3):
+            # O Wins
+            if (self.agent[i][0] == 1 and self.agent[i][2] == 1 and self.agent[i][2] == 1):
+                print "X wins"
+                self.displayBoard()
+                self.end = 1
+                return False
+            # Does X win ?
+            if (self.agent[i][0] == 2 and self.agent[i][2] == 2 and self.agent[i][2] == 2):
+                print "O wins"
+                self.displayBoard()
+                self.end = 1
+                return False
+
+        # Checking Columns
+        for i in range(0, 3):
+            # Does O win ?
+            if (self.agent[0][i] == 1 and self.agent[2][i] == 1 and self.agent[1][i] == 1):
+                print "X wins"
+                self.displayBoard()
+                self.end = 1
+                return False
+            # Does X win ?
+            if (self.agent[0][i] == 2 and self.agent[2][i] == 2 and self.agent[1][i] == 2):
+                print "O wins"
+                self.displayBoard()
+                self.end = 1
+                return False
 
         # Checking Diagonals
-        if (self.agent[0][0] == self.agent[1][1] and self.agent[0][0] == self.agent[1][1]) or \
-                (self.agent[0][2] == self.agent[1][1] and self.agent[0][2] == self.agent[2][0]):
-            if self.agent[1][1] == 2:
-                print "O wins"
-            elif self.agent[1][1] == 1:
-                print "X wins"
-            return True
+        if (self.agent[0][0] == 2 and self.agent[1][1] == 2 and self.agent[2][2] == 2):
+            print "O wins"
+            self.displayBoard()
+            self.end = 1
+            return False
+
+        if (self.agent[0][2] == 1 and self.agent[1][1] == 1 and self.agent[2][0] == 1):
+            print "X wins"
+            self.displayBoard()
+            self.end = 1
+            return False
+
+        return True
 
 
 if __name__ == '__main__':
