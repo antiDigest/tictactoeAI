@@ -43,13 +43,13 @@ class tictactoe(object):
         # Checking rows
         for i in range(0, 3):
             # O Wins
-            if (self.agent[i][0] == 1 and self.agent[i][2] == 1 and self.agent[i][2] == 1):
+            if (self.agent[i][0] == 1 and self.agent[i][2] == 1 and self.agent[i][1] == 1):
                 print "X wins"
                 self.displayBoard()
                 self.end = 1
                 return False
             # Does X win ?
-            if (self.agent[i][0] == 2 and self.agent[i][2] == 2 and self.agent[i][2] == 2):
+            if (self.agent[i][0] == 2 and self.agent[i][2] == 2 and self.agent[i][1] == 2):
                 print "O wins"
                 self.displayBoard()
                 self.end = 1
