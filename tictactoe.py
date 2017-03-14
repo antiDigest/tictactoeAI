@@ -71,17 +71,31 @@ class tictactoe(object):
                 return False
 
         # Checking Diagonals
-        if (self.agent[0][0] == 2 and self.agent[1][1] == 2 and self.agent[2][2] == 2):
-            print "O wins"
-            self.displayBoard()
-            self.end = 1
-            return False
+        for k in range(1, 3):
+            if (self.agent[0][0] == k and self.agent[1][1] == k and self.agent[2][2] == k):
+                if k == 2:
+                    print "O wins"
+                    self.displayBoard()
+                    self.end = 1
+                    return False
+                else:
+                    print "X wins"
+                    self.displayBoard()
+                    self.end = 1
+                    return False
 
-        if (self.agent[0][2] == 1 and self.agent[1][1] == 1 and self.agent[2][0] == 1):
-            print "X wins"
-            self.displayBoard()
-            self.end = 1
-            return False
+        for k in range(1, 3):
+            if (self.agent[0][2] == k and self.agent[1][1] == k and self.agent[2][0] == k):
+                if k == 2:
+                    print "O wins"
+                    self.displayBoard()
+                    self.end = 1
+                    return False
+                else:
+                    print "X wins"
+                    self.displayBoard()
+                    self.end = 1
+                    return False
 
         return True
 
