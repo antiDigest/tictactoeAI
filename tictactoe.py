@@ -27,9 +27,12 @@ class tictactoe(object):
             print
 
     def registerMove(self, x, y):
-        if self.agent[x][y] == 0 and self.end == 0:
+        if (x >= 0 and y >= 0 and x <= 2 and y <= 2) and self.agent[x][y] == 0 and self.end == 0:
             self.agent[x][y] = 2
             return self.gameWin()
+        elif (x < 0 or y < 0 or x > 2 or y > 2) and self.end == 0:
+            print('Not a valid move !')
+            return "Invalid Move"
         elif self.end == 0:
             print('Not a valid move !')
             return "Invalid Move"

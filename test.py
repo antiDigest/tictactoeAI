@@ -1,7 +1,10 @@
 # Unit Testing Code
+# No new ideas for any other test cases -- Will add if something comes up
 
 import sys
 from tictactoe import tictactoe
+
+import random
 
 
 class TestCases(tictactoe):
@@ -13,7 +16,7 @@ class TestCases(tictactoe):
 
     def testPassAllValues(self):
 
-        print '1: Testing Register Moves for all possible values.'
+        print '1: Testing Register Move for all values.'
         print '-' * 50
         for i in range(0, 3):
             for j in range(0, 3):
@@ -34,7 +37,7 @@ class TestCases(tictactoe):
         return True
 
     def testRowsWinCases(self):
-        print '2: Testing Winning returns for all Row win types possible.'
+        print '2: Testing Winning returns for all Row win types.'
         print '-' * 50
 
         # Making all possible row wins
@@ -62,7 +65,7 @@ class TestCases(tictactoe):
         return True
 
     def testColumnsWinCases(self):
-        print '3: Testing Winning returns for all Column win types possible.'
+        print '3: Testing Winning returns for all Column win types.'
         print '-' * 50
 
         # Making all possible column wins
@@ -89,7 +92,7 @@ class TestCases(tictactoe):
         return True
 
     def testDiagonalWinCases(self):
-        print '4: Testing Winning returns for all Diagonal win types possible.'
+        print '4: Testing Winning returns for all Diagonal win types.'
         print '-' * 50
 
         # Making all possible Diagonal wins
@@ -153,6 +156,44 @@ class TestCases(tictactoe):
         print '\n\n'
         return True
 
+    def testInvalidMoves(self):
+        print '6. Testing Invalid Moves'
+        print '-' * 50
+
+        for i in range(-1, 5):
+            for j in range(-1, 5):
+                if i < 0 or i > 2 or j < 0 or j > 2:
+                    game = tictactoe()
+                    print i, j
+                    try:
+                        assert game.registerMove(i, j) == 'Invalid Move'
+                    except AssertionError, e:
+                        # game.displayBoard()
+                        print '-' * 50
+                        print 'Test Cases Failed'
+                        print '\n\n'
+                        return
+                        # raise e
+
+        for i in range(0, 3):
+            for j in range(0, 3):
+                game = tictactoe()
+                game.agent[i][j] = random.randint(1, 2)
+                try:
+                    game.displayBoard()
+                    assert game.registerMove(i, j) == 'Invalid Move'
+                except AssertionError, e:
+                    print '-' * 50
+                    print 'Test Cases Failed'
+                    print '\n\n'
+                    return
+
+        print '-' * 50
+        print 'Invalid Moves checked ...'
+        print 'Test Case passed.'
+        print '\n\n'
+        return True
+
 if __name__ == '__main__':
     # game = tictactoe()
     test = TestCases()
@@ -161,3 +202,4 @@ if __name__ == '__main__':
     test.testColumnsWinCases()
     test.testDiagonalWinCases()
     test.testNotWinCases()
+    test.testInvalidMoves()
